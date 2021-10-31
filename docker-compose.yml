@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=new-user-08
+      - MONGO_INITDB_ROOT_PASSWORD=E0ogGTJGe2SEcBdI
+      - MONGO_INITDB_DATABASE=djangomongo
+
+  server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    volumes:
+      - ./openFood:/code
+    ports:
+      - '8000:8000'
+    links:
+      - mongo
+    environment:
+      - MONGODB_CONNSTRING=mongodb://new-user-08:E0ogGTJGe2SEcBdI@mongo
