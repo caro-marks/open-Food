@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-40fa$)^9n167okn)d1_qrqoi89y%+u+cv*6zaa1*he8pr9o132"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -83,10 +84,10 @@ DATABASES = {
         "NAME": "openFood",
         "ENFORCE_SCHEMA": False,
         "CLIENT": {
-            "host": "mongodb+srv://new-user-08:E0ogGTJGe2SEcBdI@diving.gelyx.mongodb.net/openFood?retryWrites=true&w=majority",
-            "port": 27017,
-            "username": "new-user-08",
-            "password": "E0ogGTJGe2SEcBdI",
+            "host": f"mongodb+srv://{config('MONGO_USER')}:{config('MONGO_PSWD')}@diving.gelyx.mongodb.net/openFood?retryWrites=true&w=majority",
+            "port": int(config("MONGO_PORT")),
+            "username": config("MONGO_USER"),
+            "password": config("MONGO_PSWD"),
             "authSource": "openFood",
             "authMechanism": "SCRAM-SHA-1",
         },
