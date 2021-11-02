@@ -5,9 +5,12 @@ import httpx
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        main_path = "https://world.openfoodfacts.org?json=true&page_size=100"
+        page_size = 100
+        fields = ''.join(['code', 'url', 'creator', 'created_t',
+                         'last_modified_t', 'product_name', 'generic_name', 'quantity'])
+        main_path = f"https://world.openfoodfacts.org/api/v2/search?json=true&page_size={page_size}&fields={fields}"
         data_fetch = True
-        page = 1
+        page = 5000
         timeout = httpx.Timeout(10.0, connect=60.0)
         client = httpx.Client(timeout=timeout)
         while data_fetch:
@@ -16,6 +19,7 @@ class Command(BaseCommand):
                 data_fetch = False
                 client.close()
             else:
+                print(page)
                 for product in products["products"]:
                     try:
                         obj, created = Product.objects.get_or_create(
