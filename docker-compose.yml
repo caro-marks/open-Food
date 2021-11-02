@@ -22,5 +22,3 @@ services:
       - '8000:8000'
     links:
       - mongo
-    # environment:
-    #   - MONGODB_CONNSTRING=mongodb://${MONGO_USER}:${MONGO_PSWD}@mongo

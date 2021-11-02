@@ -1,5 +1,6 @@
 Django==3.2.8
 djangorestframework==3.12.4
+django-cors-headers==3.10.0
 httpx==0.20.0
 sqlparse==0.2.4
 dnspython==2.1.0
