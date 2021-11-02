@@ -3,14 +3,14 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Product(models.Model):
-    class StatusProduct(models.TextChoices):
-        DRAFT = "DR", _("draft")
-        TRASH = "TR", _("trash")
-        PUBLISHED = "PB", _("published")
+    STATUS = (
+        ("DR", _("draft")),
+        ("TR", _("trash")),
+        ("PB", _("published"))
+    )
 
-    status = models.CharField(max_length=2, choices=StatusProduct.choices)
+    status = models.CharField(max_length=2, choices=STATUS)
     imported_t = models.DateTimeField(auto_now_add=True)
-
     code = models.TextField(default=None, null=True, db_index=True)
     url = models.TextField(default=None, null=True)
     creator = models.TextField(default=None, null=True)

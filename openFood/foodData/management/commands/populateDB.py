@@ -36,7 +36,7 @@ class Command(BaseCommand):
                             product_name=product["product_name"] if "product_name" in product else None,
                             generic_name=product["generic_name"] if "generic_name" in product else None,
                             quantity=product["quantity"] if "quantity" in product else None,
-                            status='published'
+                            status='PB'
                         )
                     except Exception as err:
                         raise Exception(err)
